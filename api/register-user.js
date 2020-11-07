@@ -8,11 +8,17 @@ const counterCollection = new MongodbInterface(db, 'counter');
 // ユーザ登録
 // 情報にかぶりがないかどうか確認する
 const registUser = async (req, res) => {
+  console.log(req.body);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array()});
+    // return res.status(422).json({ errors: errors.array()});
+    res.status(422);
+    res.type('json');
+    res.send({
+      errors: errors.array()
+    });
+    return;
   }
-  // console.log(req.body);
   // console.log('test');
 
   try {
@@ -23,14 +29,14 @@ const registUser = async (req, res) => {
     // ユーザ重複確認.同じEmailアドレスは禁止する
     const doc = await userCollection.getDocument("email",req.body.email);
     if (doc !== null) {
-      throw new Error('same email address user exists');
+      throw new Error('SAME_USER_EXIST');
     }
 
     // idを生成
     // カウンタコレクションから現在のid数を取得
     const counterInfo = await counterCollection.getDocument("_id",1);
     if (counterInfo === null) {
-      throw new Error('there is no counter');
+      throw new Error('NO_COUNTER');
     }
 
     let totalUserNum = counterInfo.totalUserNum;
@@ -65,12 +71,15 @@ const registUser = async (req, res) => {
     await counterCollection.closeClient();
 
     res.status(201);
+    res.type('json');
     res.send({
-      result: 'OK'
+      result: 'OK',
+      id: newUserId
     });
 
   } catch (err) {
     res.status(400);
+    res.type('json');
     res.send({
       error_message: err.message
     });

@@ -1,5 +1,5 @@
 var express = require('express');
-const registUser = require('../api/regist-user');
+const registerUser = require('../api/register-user');
 const getUser = require('../api/get-user');
 const getAllUser = require('../api/get-all-user');
 const { body } = require('express-validator');
@@ -14,9 +14,9 @@ router.post('/', [
   nameValidator,
   emailValidator,
   passwordValidator
-], registUser);
+], registerUser);
 
-router.get('/', [
+router.post('/one', [
   emailValidator,
   passwordValidator
 ], getUser);

@@ -9,11 +9,12 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', function(req, res) {
-  res.send('Hello World!');
+  res.type('json');
+  res.send({message: 'Hello World!'});
 });
 
 app.use('/user-info', userInfoRouter);
 
-app.listen(3000, function() {
-  console.log('Example app listening on port 3000!');
+app.listen(3010, function() {
+  console.log('Example app listening on port 3010!');
 });

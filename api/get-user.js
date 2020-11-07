@@ -8,7 +8,12 @@ const userCollection = new MongodbInterface(db, 'test_users');
 const getUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array()});
+    res.status(422);
+    res.type('json');
+    res.send({
+      errors: errors.array()
+    });
+    return;
   }
 
   try {
@@ -18,23 +23,26 @@ const getUser = async (req, res) => {
     // email情報でユーザ情報取得
     const userInfo = await userCollection.getDocument("email",req.body.email);
     if (userInfo === null) {
-      throw new Error("NO_USER");
+      throw new Error('NO_USER');
     }
 
     // パスワード確認
     if (req.body.password !== userInfo.password) {
-      throw new Error("PASSWORD_UNMATCH");
+      throw new Error('PASSWORD_UNMATCH');
     }
 
     res.status(200);
+    res.type('json');
     res.send({
       name: userInfo.name,
       id: userInfo._id,
       email: userInfo.email
     });
 
-  } catch {
+  } catch(err) {
+    console.log('catch error');
     res.status(400);
+    res.type('json');
     res.send({
       error_message: err.message
     });
