@@ -1,7 +1,7 @@
-var express = require('express');
-const registerUser = require('../api/register-user');
-const getUser = require('../api/get-user');
-const getAllUser = require('../api/get-all-user');
+const express = require('express');
+const registerUser = require('../api/user-info/register-user');
+const getUser = require('../api/user-info/get-user');
+const getAllUser = require('../api/user-info/get-all-user');
 const { body } = require('express-validator');
 var router = express.Router();
 

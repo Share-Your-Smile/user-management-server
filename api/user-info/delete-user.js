@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const MongodbInterface = require('./mongodb-interface');
+const MongodbInterface = require('../mongodb-interface');
 
 const db = 'test_db';
 const userCollection = new MongodbInterface(db, 'test_users');
