@@ -3,6 +3,7 @@ let app = express();
 let cors = require('cors');
 
 let userInfoRouter = require('./router/user-info-router');
+const qrcodeGeneratorRouter = require('./router/qrcode-generator-router');
 
 app.use(cors());
 
@@ -14,6 +15,8 @@ app.get('/', function(req, res) {
 });
 
 app.use('/user-info', userInfoRouter);
+
+app.use('/qrcode', qrcodeGeneratorRouter);
 
 app.listen(3010, function() {
   console.log('Example app listening on port 3010!');
