@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Share Your Smile ユーザー情報管理ページ</title>
+  </head>
+  <body>
+    <h1>登録ユーザ一覧</h1>
+    <table id="all-user">
+      <thead>
+        <tr>
+            <!-- <th colspan="2">The table header</th> -->
+            <td>ID</td>
+            <td>ユーザー名</td>
+            <td>email</td>
+            <td>選択</td>
+        </tr>
+      </thead>
+      <tbody id="user-info-body">
+          <tr></tr>
+      </tbody>
+    </table>
+    <button id="delete-butoon" onclick="deleteUser()">削除</button>
+    <script src="./action.js"></script>
+  </body>
+  <style>
+    table,
+    td {
+        border: 1px solid #333;
+    }
+
+    thead,
+    tfoot {
+        background-color: #333;
+        color: #fff;
+    }
+  </style>
+</html>
