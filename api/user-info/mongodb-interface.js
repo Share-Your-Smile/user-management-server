@@ -1,10 +1,12 @@
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 const assert = require('assert');
+require('dotenv').config();
 
 module.exports = class MongodbInterface {
   constructor (db, collection) {
-    this.mongoURL = 'mongodb://127.0.0.1:27017';
+    // this.mongoURL = 'mongodb://127.0.0.1:27017';
+    this.mongoURL = process.env.MONGODB_URL;
     this.dbName = db;
     this.collection = collection;
     this.client = undefined;

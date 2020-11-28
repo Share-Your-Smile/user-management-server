@@ -1,8 +1,8 @@
 const { validationResult } = require('express-validator');
 const MongodbInterface = require('./mongodb-interface');
 
-const db = 'test_db';
-const userCollection = new MongodbInterface(db, 'test_users');
+const db = 'share-your-smile-user';
+const userCollection = new MongodbInterface(db, 'host_users');
 const counterCollection = new MongodbInterface(db, 'counter');
 
 // ユーザ登録

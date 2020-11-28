@@ -1,7 +1,7 @@
 const MongodbInterface = require('./mongodb-interface');
 
-const db = 'test_db';
-const userCollection = new MongodbInterface(db, 'test_users');
+const db = 'share-your-smile-user';
+const userCollection = new MongodbInterface(db, 'host_users');
 
 // ユーザ取得
 const getAllUser = async (req, res) => {
