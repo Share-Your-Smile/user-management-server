@@ -1,9 +1,9 @@
 const express = require('express');
-const registerUser = require('../api/user-info/register-user');
-const getUser = require('../api/user-info/get-user');
-const getAllUser = require('../api/user-info/get-all-user');
+const registerUser = require('../api/admin/register-user');
+const getUser = require('../api/admin/get-user');
+const getAllUser = require('../api/admin/get-all-user');
 const { body } = require('express-validator');
-var router = express.Router();
+const router = express.Router();
 
 const nameValidator = body('name').isString();
 const emailValidator = body('email').isEmail();

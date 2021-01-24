@@ -2,11 +2,12 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-const userInfoRouter = require('./router/user-info-router');
-const qrcodeGeneratorRouter = require('./router/qrcode-generator-router');
-const auth = require('./router/auth');
+const adminRouter = require('./router/admin');
+const qrcodeRouter = require('./router/qrcode');
+const authRouter = require('./router/auth');
+const imageRouter = require('./router/image');
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,9 +18,15 @@ app.get('/', function(req, res) {
   res.send({message: 'Hello World!'});
 });
 
-app.use('/', auth);
-app.use('/user-info', userInfoRouter);
-app.use('/qrcode', qrcodeGeneratorRouter);
+// 認証機能
+app.use('/', cors(), authRouter);
+// ユーザー登録機能
+app.use('/user-info', adminRouter);
+// QRコードジェネレーター
+app.use('/qrcode', cors(), qrcodeRouter);
+// 画像情報
+// 画像情報APIはトークン認証しない。スライドショー画面でホストがログインし直すのはよろしくない
+app.use('/image', cors(), imageRouter);
 
 // ➅エラーハンドリング
 app.use((err, req, res, next)=>{
