@@ -19,14 +19,14 @@ app.get('/', function(req, res) {
 });
 
 // 認証機能
-app.use('/', cors(), authRouter);
+app.use('/api/v1/', cors(), authRouter);
 // ユーザー登録機能
-app.use('/user-info', adminRouter);
+app.use('/api/v1/admin', adminRouter);
 // QRコードジェネレーター
-app.use('/qrcode', cors(), qrcodeRouter);
+app.use('/api/v1/qrcode', cors(), qrcodeRouter);
 // 画像情報
 // 画像情報APIはトークン認証しない。スライドショー画面でホストがログインし直すのはよろしくない
-app.use('/image', cors(), imageRouter);
+app.use('/api/v1/image', cors(), imageRouter);
 
 // ➅エラーハンドリング
 app.use((err, req, res, next)=>{
