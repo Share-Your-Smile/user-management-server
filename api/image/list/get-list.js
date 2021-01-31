@@ -4,7 +4,7 @@ const getList = async (req, res) => {
   const s3 = new S3();
 
   try {
-    const userId = req.params.userId;
+    const userId = req.params.hostId;
 
     const list = await s3.getImagesList(userId);
 

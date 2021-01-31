@@ -5,10 +5,10 @@ const getList = require('../api/image/list/get-list');
 const router = express.Router();
 
 // GET api/:userId/image/:fileName
-router.get('/:hostId/:fileName', getImage);
+router.get('/images/:hostId/:fileName', getImage);
 
 // POST api/:userId/image/:fileName
-router.post('/:hostId', setImage);
+router.post('/images/:hostId', setImage);
 
 // GET api/:userId/list
 router.get('/list/:hostId',getList);

@@ -46,7 +46,7 @@ const login = async (req, res) => {
     };
 
     const option = {
-        expiresIn: '1m'
+        expiresIn: '2days'
     }
     const token = jwt.sign(payload, process.env.SECRET_KEY, option);
     res.json({

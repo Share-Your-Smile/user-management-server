@@ -7,9 +7,9 @@ const qrcodeRouter = require('./router/qrcode');
 const authRouter = require('./router/auth');
 const imageRouter = require('./router/image');
 
-// app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.json({ extended: true, limit: '20mb'}));
+app.use(express.urlencoded({ extended: true, limit: '20mb'}));
 
 app.use('/admin', express.static('public'));
 
