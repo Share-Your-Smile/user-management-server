@@ -65,7 +65,7 @@ const setImage = async (req, res) => {
 
   try {
     // クエリでユーザー名を受け取る
-    const hostId = req.params.hostId;
+    const filePath = s3.setS3FolderPath(req.params.hostId);
     const timeStamp = getDate();
 
     const encodedData = req.body.image;
@@ -79,7 +79,7 @@ const setImage = async (req, res) => {
     const contentType = encodedData.toString().slice(encodedData.indexOf(':') + 1, encodedData.indexOf(';'));
     const fileName = `${timeStamp}_${posterName}.${fileExtension}`;
 
-    await s3.uploadImage(hostId, decodedFile, contentType, fileName);
+    await s3.uploadImage(filePath, decodedFile, contentType, fileName);
 
     res.status(200);
     res.send({

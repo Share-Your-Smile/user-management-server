@@ -10,12 +10,20 @@ module.exports = class CommonS3Access {
     this.S3_SLIDE_BUCKET = process.env.S3_SLIDE_BUCKET;
   }
 
+  setS3FolderPath(hostId, prefix = null) {
+    if (prefix) {
+      return `${prefix}-user-${hostId}`;
+    } else {
+      return `user-${hostId}`;
+    }
+  }
+
   // 画像データを格納する
-  async uploadImage(userId, decodedFile, contentType, fileName) {
+  async uploadImage(folderPath, decodedFile, contentType, fileName) {
     const params = {
       Body: decodedFile,
       Bucket: this.S3_BUCKET,
-      Key: `${userId}/${fileName}`,
+      Key: `${folderPath}/${fileName}`,
       ContentType: contentType
     }
     const s3 = new aws.S3();
@@ -24,10 +32,10 @@ module.exports = class CommonS3Access {
   }
 
   // 画像データの一覧を取得する
-  async getImagesList(userId) {
+  async getImagesList(filePath) {
     const params = {
-      Bucket: this.setBucket(userId),
-      Prefix: `${userId}`,
+      Bucket: this.setBucket(filePath),
+      Prefix: `${filePath}`,
     }
 
     const lists = [];
