@@ -1,5 +1,6 @@
 const express = require('express');
 const login = require('../api/auth/login');
+const logout = require('../api/auth/logout');
 const getUser = require('../api/auth/user/get-user');
 const setUser = require('../api/auth/user/set-user');
 
@@ -16,6 +17,8 @@ router.post('/login', [
   emailValidator,
   passwordValidator
 ], login);
+
+router.post('/logout', logout);
 
 router.get('/user', auth, getUser);
 
