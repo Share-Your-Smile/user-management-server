@@ -6,6 +6,7 @@ const adminRouter = require('./router/admin');
 const qrcodeRouter = require('./router/qrcode');
 const authRouter = require('./router/auth');
 const imageRouter = require('./router/image');
+const contactRouter = require('./router/contact');
 
 app.use(cors());
 app.use(express.json({ extended: true, limit: '20mb'}));
@@ -27,6 +28,8 @@ app.use('/api/v1/qrcode', cors(), qrcodeRouter);
 // 画像情報
 // 画像情報APIはトークン認証しない。スライドショー画面でホストがログインし直すのはよろしくない
 app.use('/api/v1/image', cors(), imageRouter);
+// メール送信
+app.use('/api/v1/contact', contactRouter);
 
 // ➅エラーハンドリング
 app.use((err, req, res, next)=>{
