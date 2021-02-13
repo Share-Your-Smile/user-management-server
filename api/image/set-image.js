@@ -35,7 +35,7 @@ const getDate = () => {
     hour = setNum(tmp3[0]);
     minute = setNum(tmp3[1]);
     second = setNum(tmp3[2]);
-  } else if (jstDate.indexOf(',') !== -1) {
+  } else if (jstDate.indexOf(',') === -1) {
     // YYYY/MM/DD HH:MM:SS
     tmp1 = jstDate.split('/');
     console.log(tmp1);
