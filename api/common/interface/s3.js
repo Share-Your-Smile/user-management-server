@@ -28,7 +28,7 @@ module.exports = class CommonS3Access {
     }
     const s3 = new aws.S3();
     return s3.putObject(params).promise()
-      .catch((err) => { throw new Error('upload failure')}) 
+      .catch((err) => { throw new Error(err)}) 
   }
 
   // 画像データの一覧を取得する

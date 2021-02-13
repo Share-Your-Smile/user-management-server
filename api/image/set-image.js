@@ -64,12 +64,15 @@ const setImage = async (req, res) => {
   const s3 = new S3();
 
   try {
+    console.log(`set start`);
     // クエリでユーザー名を受け取る
     const filePath = s3.setS3FolderPath(req.params.hostId);
     const timeStamp = getDate();
 
     const encodedData = req.body.image;
     const posterName = req.body.poster;
+
+    console.log(`file name generate!`);
 
     const fileData = encodedData.replace(/^data:\w+\/\w+;base64,/, '')
     const decodedFile = new Buffer.from(fileData, 'base64');
@@ -78,6 +81,8 @@ const setImage = async (req, res) => {
     // // ContentType(image/png)
     const contentType = encodedData.toString().slice(encodedData.indexOf(':') + 1, encodedData.indexOf(';'));
     const fileName = `${timeStamp}_${posterName}.${fileExtension}`;
+
+    console.log(`fileName ${fileName}`);
 
     await s3.uploadImage(filePath, decodedFile, contentType, fileName);
 
@@ -89,6 +94,7 @@ const setImage = async (req, res) => {
       }
     });
   } catch (err) {
+    console.log(err);
     res.status(400);
     res.send({
       message: err
