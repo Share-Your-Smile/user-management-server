@@ -35,6 +35,19 @@ const getDate = () => {
     hour = setNum(tmp3[0]);
     minute = setNum(tmp3[1]);
     second = setNum(tmp3[2]);
+  } else if (jstDate.indexOf(',') !== -1) {
+    // YYYY/MM/DD HH:MM:SS
+    tmp1 = jstDate.split('/');
+    console.log(tmp1);
+    tmp2 = tmp1[2].split(' ');
+    tmp3 = tmp2[1].split(':');
+
+    year = setNum(tmp1[0]);
+    month = setNum(tmp1[1]);
+    day = setNum(tmp2[0]);
+    hour = setNum(tmp3[0]);
+    minute = setNum(tmp3[1]);
+    second = setNum(tmp3[2]);
   } else {
     // MM/DD/YYYY, HH:MM:SS AMorPM
     tmp1 = jstDate.split('/');
